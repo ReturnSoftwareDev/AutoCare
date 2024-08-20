@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AutoCare.Domain.Entities;
-public class Address : BaseEntity<short>
+public class Address : BaseEntity<int>
 {
     public string Street { get; set; }
     public string City { get; set; }

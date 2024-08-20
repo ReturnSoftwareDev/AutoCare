@@ -4,6 +4,7 @@ using AutoCare.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoCare.Persistance.Migrations
 {
     [DbContext(typeof(AutoCareContext))]
-    partial class AutoCareContextModelSnapshot : ModelSnapshot
+    [Migration("20240820163553_addEntities")]
+    partial class addEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,7 +59,7 @@ namespace AutoCare.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Abouts", (string)null);
+                    b.ToTable("Abouts");
                 });
 
             modelBuilder.Entity("AutoCare.Domain.Entities.AboutArticle", b =>
@@ -90,7 +93,7 @@ namespace AutoCare.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AboutArticles", (string)null);
+                    b.ToTable("AboutArticles");
                 });
 
             modelBuilder.Entity("AutoCare.Domain.Entities.Address", b =>
@@ -142,7 +145,7 @@ namespace AutoCare.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses", (string)null);
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("AutoCare.Domain.Entities.Banner", b =>
@@ -172,7 +175,7 @@ namespace AutoCare.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Banners", (string)null);
+                    b.ToTable("Banners");
                 });
 
             modelBuilder.Entity("AutoCare.Domain.Entities.CompanyAddress", b =>
@@ -206,7 +209,7 @@ namespace AutoCare.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CompanyAddresses", (string)null);
+                    b.ToTable("CompanyAddresses");
                 });
 
             modelBuilder.Entity("AutoCare.Domain.Entities.ContactMessage", b =>
@@ -248,7 +251,7 @@ namespace AutoCare.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ContactMessages", (string)null);
+                    b.ToTable("ContactMessages");
                 });
 
             modelBuilder.Entity("AutoCare.Domain.Entities.Feature", b =>
@@ -282,7 +285,7 @@ namespace AutoCare.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Features", (string)null);
+                    b.ToTable("Features");
                 });
 
             modelBuilder.Entity("AutoCare.Domain.Entities.Inform", b =>
@@ -319,7 +322,7 @@ namespace AutoCare.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Informs", (string)null);
+                    b.ToTable("Informs");
                 });
 
             modelBuilder.Entity("AutoCare.Domain.Entities.Mechanic", b =>
@@ -363,7 +366,7 @@ namespace AutoCare.Persistance.Migrations
 
                     b.HasIndex("AddressId1");
 
-                    b.ToTable("Mechanics", (string)null);
+                    b.ToTable("Mechanics");
                 });
 
             modelBuilder.Entity("AutoCare.Domain.Entities.Newsletter", b =>
@@ -389,7 +392,7 @@ namespace AutoCare.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Newsletters", (string)null);
+                    b.ToTable("Newsletters");
                 });
 
             modelBuilder.Entity("AutoCare.Domain.Entities.Service", b =>
@@ -415,7 +418,7 @@ namespace AutoCare.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services", (string)null);
+                    b.ToTable("Services");
                 });
 
             modelBuilder.Entity("AutoCare.Domain.Entities.SocialMedia", b =>
@@ -445,7 +448,7 @@ namespace AutoCare.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SocialMedias", (string)null);
+                    b.ToTable("SocialMedias");
                 });
 
             modelBuilder.Entity("MechanicService", b =>
@@ -460,7 +463,7 @@ namespace AutoCare.Persistance.Migrations
 
                     b.HasIndex("ServicesId");
 
-                    b.ToTable("MechanicService", (string)null);
+                    b.ToTable("MechanicService");
                 });
 
             modelBuilder.Entity("AutoCare.Domain.Entities.Mechanic", b =>

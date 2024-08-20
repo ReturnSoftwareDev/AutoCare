@@ -1,4 +1,4 @@
-using AutoCare.Persistance;
+using AutoCare.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
