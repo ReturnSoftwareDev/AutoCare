@@ -15,7 +15,7 @@ namespace AutoCare.Application.Services
             services.AddMediatR(cfg => {
                 cfg.RegisterServicesFromAssembly(typeof(AddMediatorService).Assembly);
                 cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
-                });
+            });
         }
     }
 }

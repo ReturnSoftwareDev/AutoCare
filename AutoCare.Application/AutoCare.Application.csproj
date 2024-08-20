@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Base\" />
-    <Folder Include="Mapping\" />
-    <Folder Include="Mediator\" />
     <Folder Include="Validator\" />
   </ItemGroup>
 
@@ -29,6 +26,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AutoCare.Domain\AutoCare.Domain.csproj" />
   </ItemGroup>
 
 </Project>
