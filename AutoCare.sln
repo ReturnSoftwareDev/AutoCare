@@ -11,17 +11,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{1A3B052A-7E38-473B-8638-09CA0670C740}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCare.Application", "AutoCare.Application\AutoCare.Application.csproj", "{65E2DCB9-0631-4C41-880B-2FE916FD4852}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoCare.Application", "AutoCare.Application\AutoCare.Application.csproj", "{65E2DCB9-0631-4C41-880B-2FE916FD4852}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCare.Domain", "AutoCare.Domain\AutoCare.Domain.csproj", "{4ECFCF4A-F033-4E76-BA23-B006571E1F83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoCare.Domain", "AutoCare.Domain\AutoCare.Domain.csproj", "{4ECFCF4A-F033-4E76-BA23-B006571E1F83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCare.DTO", "AutoCare.DTO\AutoCare.DTO.csproj", "{6CE30B46-31C2-488F-91C5-956702A8A056}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoCare.DTO", "AutoCare.DTO\AutoCare.DTO.csproj", "{6CE30B46-31C2-488F-91C5-956702A8A056}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCare.WebUI", "AutoCare.WebUI\AutoCare.WebUI.csproj", "{C2639D22-7BEA-44A0-9E42-64C90267580C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoCare.WebUI", "AutoCare.WebUI\AutoCare.WebUI.csproj", "{C2639D22-7BEA-44A0-9E42-64C90267580C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCare.Persistance", "AutoCare.Persistance\AutoCare.Persistance.csproj", "{A5763FC3-B679-4901-8F1D-FB7E687F909C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoCare.Persistance", "AutoCare.Persistance\AutoCare.Persistance.csproj", "{A5763FC3-B679-4901-8F1D-FB7E687F909C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCare.WebAPI", "AutoCare.WebAPI\AutoCare.WebAPI.csproj", "{2469BD14-4E85-45A7-BDA7-F2C940FFA7D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoCare.WebAPI", "AutoCare.WebAPI\AutoCare.WebAPI.csproj", "{2469BD14-4E85-45A7-BDA7-F2C940FFA7D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
