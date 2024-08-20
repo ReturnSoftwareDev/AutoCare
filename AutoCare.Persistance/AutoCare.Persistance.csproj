@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AutoCare.Application\AutoCare.Application.csproj" />
     <ProjectReference Include="..\AutoCare.Domain\AutoCare.Domain.csproj" />
   </ItemGroup>
 

@@ -26,9 +26,5 @@ public class AutoCareContext : DbContext
     public DbSet<Inform> Informs{ get; set; }
     public DbSet<Feature> Features{ get; set; }
 
-    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-    {
-        return base.SaveChangesAsync(cancellationToken);
-    }
 }
 
