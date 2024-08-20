@@ -1,11 +1,12 @@
 using AutoCare.Persistance.Context;
+using AutoCare.Persistance.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
+
+builder.Services.AddPersistenceConfiguration();
 
 builder.Services.AddDbContext<AutoCareContext>(opt =>
 {
