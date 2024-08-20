@@ -24,11 +24,11 @@ namespace AutoCare.Persistance.Migrations
 
             modelBuilder.Entity("AutoCare.Domain.Entities.Address", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<short>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("smallint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
 
                     b.Property<string>("BuildingNumber")
                         .IsRequired()
@@ -49,6 +49,9 @@ namespace AutoCare.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Latitude")
                         .HasColumnType("nvarchar(max)");
 
@@ -63,6 +66,9 @@ namespace AutoCare.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("Addresses");
@@ -70,14 +76,17 @@ namespace AutoCare.Persistance.Migrations
 
             modelBuilder.Entity("AutoCare.Domain.Entities.Mechanic", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<short>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("smallint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
 
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
+
+                    b.Property<short>("AddressId1")
+                        .HasColumnType("smallint");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -88,6 +97,9 @@ namespace AutoCare.Persistance.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -96,27 +108,36 @@ namespace AutoCare.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("AddressId1");
 
                     b.ToTable("Mechanics");
                 });
 
             modelBuilder.Entity("AutoCare.Domain.Entities.Service", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<short>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("smallint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -125,11 +146,11 @@ namespace AutoCare.Persistance.Migrations
 
             modelBuilder.Entity("MechanicService", b =>
                 {
-                    b.Property<int>("MechanicsId")
-                        .HasColumnType("int");
+                    b.Property<short>("MechanicsId")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("ServicesId")
-                        .HasColumnType("int");
+                    b.Property<short>("ServicesId")
+                        .HasColumnType("smallint");
 
                     b.HasKey("MechanicsId", "ServicesId");
 
@@ -142,7 +163,7 @@ namespace AutoCare.Persistance.Migrations
                 {
                     b.HasOne("AutoCare.Domain.Entities.Address", "Address")
                         .WithMany("Mechanics")
-                        .HasForeignKey("AddressId")
+                        .HasForeignKey("AddressId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

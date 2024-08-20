@@ -15,7 +15,7 @@ namespace AutoCare.Persistance.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<short>(type: "smallint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -25,7 +25,9 @@ namespace AutoCare.Persistance.Migrations
                     IndustrialArea = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Latitude = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Longitude = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,10 +38,12 @@ namespace AutoCare.Persistance.Migrations
                 name: "Services",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<short>(type: "smallint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,21 +54,24 @@ namespace AutoCare.Persistance.Migrations
                 name: "Mechanics",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<short>(type: "smallint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddressId = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    AddressId1 = table.Column<short>(type: "smallint", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Mechanics", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Mechanics_Addresses_AddressId",
-                        column: x => x.AddressId,
+                        name: "FK_Mechanics_Addresses_AddressId1",
+                        column: x => x.AddressId1,
                         principalTable: "Addresses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -74,8 +81,8 @@ namespace AutoCare.Persistance.Migrations
                 name: "MechanicService",
                 columns: table => new
                 {
-                    MechanicsId = table.Column<int>(type: "int", nullable: false),
-                    ServicesId = table.Column<int>(type: "int", nullable: false)
+                    MechanicsId = table.Column<short>(type: "smallint", nullable: false),
+                    ServicesId = table.Column<short>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,9 +102,9 @@ namespace AutoCare.Persistance.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Mechanics_AddressId",
+                name: "IX_Mechanics_AddressId1",
                 table: "Mechanics",
-                column: "AddressId");
+                column: "AddressId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MechanicService_ServicesId",

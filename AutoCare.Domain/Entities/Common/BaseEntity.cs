@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AutoCare.Domain.Entities.Common;
-public class BaseEntity
+public class BaseEntity<TId>
 {
-    public int Id { get; set; }
+    public TId Id { get; set; }
     public DateTime CreatedDate { get; set; }
+    public DateTime? UpdatedDate { get; set; } 
+    public bool IsDeleted { get; set; }
 }

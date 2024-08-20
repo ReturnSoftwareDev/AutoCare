@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AutoCare.Domain.Entities;
-public class Mechanic : BaseEntity
+public class Mechanic : BaseEntity<short>
 {
     public string Name { get; set; }
     public string PhoneNumber { get; set; }
