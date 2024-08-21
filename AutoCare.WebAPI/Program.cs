@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using AutoCare.Domain.Entities;
 using AutoCare.Application.Services;
 using AutoCare.Application.Base;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using FluentValidation;
+using AutoCare.Application.FVExceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +38,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<CustomExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
