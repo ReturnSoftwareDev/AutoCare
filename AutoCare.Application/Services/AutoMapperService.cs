@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using AutoCare.Application.Mapping;
+using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,10 @@ namespace AutoCare.Application.Services
 {
     public static class AutoMapperService
     {
-        public static void AddAutoMapper(this IServiceCollection services)
+        public static void AddAutoMapperService(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            //services.AddAutoMapper(typeof(GeneralMapping).Assembly);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace AutoCare.Application.Behavior
                     .ToList();
 
                 if(failures.Count > 0)
-                    throw new FluentValidation.ValidationException(failures);
+                    throw new ValidationException(failures);
 
             }
             return await next().ConfigureAwait(false);

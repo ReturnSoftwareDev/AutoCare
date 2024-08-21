@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace AutoCare.Application.Services
 {
-    public static class AddMediatorService
+    public static class MediatorService
     {
-        public static void AddMediator(this IServiceCollection services)
+        public static void AddMediatorService(this IServiceCollection services)
         {
             services.AddMediatR(cfg => {
-                cfg.RegisterServicesFromAssembly(typeof(AddMediatorService).Assembly);
+                cfg.RegisterServicesFromAssembly(typeof(MediatorService).Assembly);
                 cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
             });
         }

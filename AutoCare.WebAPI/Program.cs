@@ -10,8 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPersistenceConfiguration();
 
-builder.Services.AddFluentValidation();
-builder.Services.AddMediator();
+builder.Services.AddFluentValidationService();
+builder.Services.AddMediatorService();
+builder.Services.AddAutoMapperService();
 
 builder.Services.AddExtensionConfiguration();
 

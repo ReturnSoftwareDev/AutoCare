@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace AutoCare.Application.Services
 {
-    public static class AddFluentValidationService
+    public static class FluentValidationService
     {
-        public static void AddFluentValidation(this IServiceCollection services)
+        public static void AddFluentValidationService(this IServiceCollection services)
         {
             
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
