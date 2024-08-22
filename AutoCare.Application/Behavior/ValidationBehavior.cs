@@ -20,7 +20,7 @@ namespace AutoCare.Application.Behavior
                 var context = new ValidationContext<TRequest>(request);
 
                 var validationResult = await Task.WhenAll(
-                    validators.Select(x => x.ValidateAsync(context,cancellationToken))).ConfigureAwait(false);
+                    validators.Select(x => x.ValidateAsync(context, cancellationToken)));
 
                 var failures = validationResult
                     .Where(r => r.Errors.Count > 0)
@@ -31,7 +31,7 @@ namespace AutoCare.Application.Behavior
                     throw new ValidationException(failures);
 
             }
-            return await next().ConfigureAwait(false);
+            return await next();
 
 
         }

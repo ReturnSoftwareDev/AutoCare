@@ -10,8 +10,8 @@ namespace AutoCare.Application.Base
     {
         public CommandResponse(string message, int code)
         {
-            Message = string.Empty;
-            Code = 0;
+            Message = message;
+            Code = code;
         }
 
         public string Message { get; set; }

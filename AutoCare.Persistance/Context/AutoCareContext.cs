@@ -1,4 +1,5 @@
 ﻿using AutoCare.Domain.Entities;
+using AutoCare.Persistance.Configurations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,11 @@ public class AutoCareContext : DbContext
     public DbSet<SocialMedia> SocialMedias { get; set; }
     public DbSet<Inform> Informs{ get; set; }
     public DbSet<Feature> Features{ get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfiguration(new SocialMediaConfiguration());
+    }
 
 }
 

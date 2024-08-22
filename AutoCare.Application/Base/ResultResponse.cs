@@ -10,9 +10,9 @@ namespace AutoCare.Application.Base
     {
         public ResultResponse(T data, string message, int code)
         {
-            Data = default;
-            Message = string.Empty;
-            Code = 0;
+            Data = data;
+            Message = message;
+            Code = code;
         }
 
         public T? Data { get; set; }
