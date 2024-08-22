@@ -9,16 +9,16 @@ namespace AutoCare.Application.Mediator.Handlers.SocialMediaHandlers
 {
     public class GetAboutByIdQueryHandler : IRequestHandler<GetAboutByIdQuery, ResultResponse<GetAboutByIdQueryResult>>
     {
-        private readonly IAboutService _aboutService;
+        private readonly IAboutService _AboutService;
 
-        public GetAboutByIdQueryHandler(IAboutService aboutService)
+        public GetAboutByIdQueryHandler(IAboutService AboutService)
         {
-            _aboutService = aboutService;
+            _AboutService = AboutService;
         }
 
         public async Task<ResultResponse<GetAboutByIdQueryResult>> Handle(GetAboutByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _aboutService.GetByIdAbout(request);
+            return await _AboutService.GetByIdAbout(request);
         }
     }
 }
