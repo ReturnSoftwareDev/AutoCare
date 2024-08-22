@@ -18,6 +18,7 @@ namespace AutoCare.Persistance.Configurations
         public static void AddExtensionConfiguration(this IServiceCollection services)
         {
             services.AddScoped<ISocialMediaService, SocialMediaService>();
+            services.AddScoped<IAboutService, AboutService>();
         }
     }
 }

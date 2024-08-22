@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace AutoCare.Application.Mediator.Handlers.SocialMediaHandlers
 {
-    public class GetByIdSocialMediaQueryResultHandler : IRequestHandler<GetByIdSocialMediaQuery, ResultResponse<GetByIdSocialMediaQueryResult>>
+    public class GetAboutByIdQueryResultHandler : IRequestHandler<GetByIdSocialMediaQuery, ResultResponse<GetByIdSocialMediaQueryResult>>
     {
         private readonly ISocialMediaService _service;
 
-        public GetByIdSocialMediaQueryResultHandler(ISocialMediaService service)
+        public GetAboutByIdQueryResultHandler(ISocialMediaService service)
         {
             _service = service;
         }

@@ -1,4 +1,6 @@
-﻿using AutoCare.Application.Mediator.Commands.SocialMediaCommands;
+﻿using AutoCare.Application.Mediator.Commands.AboutCommands;
+using AutoCare.Application.Mediator.Commands.SocialMediaCommands;
+using AutoCare.Application.Mediator.Results.AboutResults;
 using AutoCare.Application.Mediator.Results.SocialMediaResults;
 using AutoCare.Domain.Entities;
 using AutoMapper;
@@ -18,6 +20,11 @@ namespace AutoCare.Application.Mapping
             CreateMap<UpdateSocialMediaCommand, SocialMedia>().ReverseMap();
             CreateMap<GetByIdSocialMediaQueryResult, SocialMedia>().ReverseMap();
             CreateMap<GetSocialMediasQueryResult, SocialMedia>().ReverseMap();
+
+            CreateMap<CreateAboutCommand, About>().ReverseMap();
+            CreateMap<UpdateAboutCommand, About>().ReverseMap();
+            CreateMap<GetAboutByIdQueryResult, About>().ReverseMap();
+            CreateMap<GetAboutQueryResult, About>().ReverseMap();
         }
     }
 }
