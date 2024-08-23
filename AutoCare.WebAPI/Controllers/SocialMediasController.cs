@@ -1,5 +1,7 @@
 ﻿using AutoCare.Application.Mediator.Commands.SocialMediaCommands;
 using AutoCare.Application.Mediator.Queries.SocialMediaQueries;
+using AutoCare.Application.Validator.SocialMediaValidator;
+using FluentValidation.Results;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
