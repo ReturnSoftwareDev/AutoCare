@@ -11,4 +11,7 @@ public class BaseEntity<TId>
     public DateTime CreatedDate { get; set; }
     public DateTime? UpdatedDate { get; set; } 
     public bool IsDeleted { get; set; }
+    public string? CreatedBy{ get; set; }
+    public DateTime? LastModifiedDate { get; set; }
+    public string? LastModifiedBy { get; set; }
 }
