@@ -1,5 +1,6 @@
 ﻿using AutoCare.Application.Mediator.Results.UserResults;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,9 @@ namespace AutoCare.Application.Tools
     {
         private readonly JwtTokenModel _jwtTokenModel;
 
-        public JwtGeneratorToken(IConfiguration configuration)
+        public JwtGeneratorToken(IOptions<JwtTokenModel> options)
         {
-            _jwtTokenModel = configuration.GetSection("AppSettings").Get<JwtTokenModel>();
+            _jwtTokenModel = options.Value;
         }
 
         public async Task<JwtResponseModel> GenerateToken(UserLoginQueryResult model)
@@ -38,14 +39,14 @@ namespace AutoCare.Application.Tools
                     audience: _jwtTokenModel.ValidAudience,
                     claims: claims,
                     notBefore: dateTimeNow,
-                    expires: dateTimeNow.Add(TimeSpan.FromMinutes(5)),
+                    expires: dateTimeNow.Add(TimeSpan.FromSeconds(20)),
                     signingCredentials: new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256)
                 );
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
             return await Task.FromResult(new JwtResponseModel
             {
                 Token = handler.WriteToken(jwtSecurityToken),
-                ExpireDate = dateTimeNow.Add(TimeSpan.FromMinutes(5)),
+                ExpireDate = dateTimeNow.Add(TimeSpan.FromSeconds(20)),
             });
         }
     }

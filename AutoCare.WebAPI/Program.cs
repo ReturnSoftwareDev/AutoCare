@@ -12,6 +12,7 @@ using AutoCare.Application.Tools;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,8 @@ builder.Services.AddAutoMapperService();
 
 builder.Services.AddExtensionConfiguration();
 
+
+//cors politikasý güncellenecek.
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AutoCareApiCors",
@@ -36,6 +39,8 @@ builder.Services.AddCors(options =>
                    .AllowCredentials();
         });
 });
+
+builder.Services.Configure<JwtTokenModel>(builder.Configuration.GetSection("AppSettings"));
 
 builder.Services.AddAuthentication(options =>
 {
@@ -75,8 +80,38 @@ builder.Services.AddDbContext<AutoCareContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(x =>
+{
+    x.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+    //x.EnableAnnotations();
+
+    x.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme (Example: 'Bearer 12345abcdef')",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = JwtBearerDefaults.AuthenticationScheme
+    });
+
+    x.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { 
+        new OpenApiSecurityScheme
+        {
+            Reference = new OpenApiReference
+            {
+                Type = ReferenceType.SecurityScheme,
+                Id = JwtBearerDefaults.AuthenticationScheme
+            }
+        },
+        Array.Empty<string>()
+    }
+    }); 
+
+});
 
 var app = builder.Build();
 
@@ -88,6 +123,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<CustomExceptionMiddleware>();
+
+app.UseCors("AutoCareApiCors");
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
