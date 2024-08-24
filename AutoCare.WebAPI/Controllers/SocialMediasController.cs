@@ -3,6 +3,7 @@ using AutoCare.Application.Mediator.Queries.SocialMediaQueries;
 using AutoCare.Application.Validator.SocialMediaValidator;
 using FluentValidation.Results;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@ namespace AutoCare.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetSocialMedias()
         {
             var result = await _mediator.Send(new GetSocialMediasQuery());

@@ -8,6 +8,7 @@ using AutoCare.Application.Tools;
 using AutoCare.Application.UnitOfWorks;
 using AutoCare.Domain.Entities;
 using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -24,13 +25,15 @@ namespace AutoCare.Persistance.Repositories.EntityServices
         private readonly IReadRepository<User> _readRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly JwtGeneratorToken _jwtGeneratorToken;
 
-        public UserService(IWriteRepository<User> writeRepository, IMapper mapper, IUnitOfWork unitOfWork, IReadRepository<User> readRepository)
+        public UserService(IWriteRepository<User> writeRepository, IMapper mapper, IUnitOfWork unitOfWork, IReadRepository<User> readRepository, JwtGeneratorToken jwtGeneratorToken)
         {
             _writeRepository = writeRepository;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _readRepository = readRepository;
+            _jwtGeneratorToken = jwtGeneratorToken;
         }
 
         public async Task<ResultResponse<JwtResponseModel>> LoginUser(UserLoginQuery userLoginQuery)
@@ -41,7 +44,7 @@ namespace AutoCare.Persistance.Repositories.EntityServices
             {
                 var model = _mapper.Map<UserLoginQueryResult>(user);
 
-                var token = JwtGeneratorToken.GenerateToken(model);
+                var token =await _jwtGeneratorToken.GenerateToken(model);
 
                 return new ResultResponse<JwtResponseModel>(token, "Giriş yapıldı", (int)HttpStatusCode.OK);
             }

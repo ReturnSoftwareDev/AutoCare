@@ -9,9 +9,13 @@ using Microsoft.AspNetCore.Diagnostics;
 using FluentValidation;
 using AutoCare.Application.FVExceptions;
 using AutoCare.Application.Tools;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
 
 builder.Services.AddPersistenceConfiguration();
 
@@ -21,8 +25,51 @@ builder.Services.AddAutoMapperService();
 
 builder.Services.AddExtensionConfiguration();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AutoCareApiCors",
+        builder =>
+        {
+            builder.AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .SetIsOriginAllowed((host) => true)
+                   .AllowCredentials();
+        });
+});
 
-builder.Services.AddControllers();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(opt=>
+{
+    opt.RequireHttpsMetadata = false;
+    opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+    {
+        ValidAudience = builder.Configuration["AppSettings:ValidAudience"],
+        ValidIssuer = builder.Configuration["AppSettings:ValidIssuer"],
+        ClockSkew = TimeSpan.Zero,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:Key"])),
+        ValidateIssuerSigningKey = true,
+        ValidateLifetime = true,
+        ValidateAudience = true,
+        ValidateIssuer = true,
+        RequireExpirationTime = true, // Token'da expiration time'ýn olmasý gerektiðini doðrular
+        RequireAudience = true, // Token'da audience bilgisi olmasý gerektiðini doðrular
+        RequireSignedTokens = true // Token'ýn imzalanmýþ olmasý gerektiðini doðrular
+    };
+
+});
+
+//Rate Limiting kurulacak.
+//Refresh token oluþturulacak db ye kayýt edilecek.
+
+
+builder.Services.AddAuthorization();
+
+builder.Services.AddScoped<JwtGeneratorToken>();
+
 
 builder.Services.AddDbContext<AutoCareContext>(opt =>
 {
@@ -43,7 +90,7 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<CustomExceptionMiddleware>();
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
