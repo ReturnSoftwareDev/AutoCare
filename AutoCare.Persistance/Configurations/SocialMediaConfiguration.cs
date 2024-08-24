@@ -15,8 +15,8 @@ namespace AutoCare.Persistance.Configurations
         {
             builder.ToTable("SocialMedias");
 
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).UseIdentityColumn();
+            builder.HasKey(x => x.Id); // unique id
+            builder.Property(x => x.Id).UseIdentityColumn(); // otomatik artan
 
             builder.Property(x => x.Url)
                 .IsRequired();

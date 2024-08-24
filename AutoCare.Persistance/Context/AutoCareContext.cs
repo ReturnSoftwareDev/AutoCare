@@ -27,6 +27,7 @@ public class AutoCareContext : DbContext
     //public DbSet<ContactMessage> ContactMessages { get; set; }
     //public DbSet<Newsletter> Newsletters { get; set; }
     public DbSet<SocialMedia> SocialMedias { get; set; }
+    public DbSet<User> Users { get; set; }
     //public DbSet<Inform> Informs { get; set; }
     //public DbSet<Feature> Features { get; set; }
 

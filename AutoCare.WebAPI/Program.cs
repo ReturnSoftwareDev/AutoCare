@@ -8,6 +8,7 @@ using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using FluentValidation;
 using AutoCare.Application.FVExceptions;
+using AutoCare.Application.Tools;
 
 var builder = WebApplication.CreateBuilder(args);
 
