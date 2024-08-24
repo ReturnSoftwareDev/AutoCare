@@ -15,5 +15,6 @@ namespace AutoCare.Application.Interfaces.EntityServices
     {
         Task<CommandResponse> RegisterUser(CreateUserCommand createUserCommand);
         Task<ResultResponse<JwtResponseModel>> LoginUser(UserLoginQuery userLoginQuery);
+        Task<ResultResponse<JwtResponseModel>> RefreshTokenLoginUser(RefreshTokenLoginQuery refreshTokenLoginQuery);
     }
 }

@@ -29,6 +29,12 @@ namespace AutoCare.WebAPI.Controllers
             var result = await _mediator.Send(userLoginQuery);
             return Ok(result);
         }
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> RefreshTokenLogin(RefreshTokenLoginQuery refreshTokenLoginQuery)
+        {
+            var result = await _mediator.Send(refreshTokenLoginQuery);
+            return Ok(result);
+        }
 
 
     }

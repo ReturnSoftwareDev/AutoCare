@@ -10,5 +10,6 @@ namespace AutoCare.Application.Tools
     {
         public string Token { get; set; }
         public DateTime ExpireDate { get; set; }
+        public string RefreshToken { get; set; }
     }
 }

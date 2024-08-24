@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,11 +44,26 @@ namespace AutoCare.Application.Tools
                     signingCredentials: new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256)
                 );
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+
             return await Task.FromResult(new JwtResponseModel
             {
                 Token = handler.WriteToken(jwtSecurityToken),
                 ExpireDate = dateTimeNow.Add(TimeSpan.FromSeconds(20)),
+                RefreshToken = await RefreshToken(),
             });
         }
+
+        public async Task<string> RefreshToken()
+        {
+            byte[] number = new byte[32];
+
+            using RandomNumberGenerator random = RandomNumberGenerator.Create();
+            random.GetBytes(number);
+            return Convert.ToBase64String(number);
+        }
+
+
+
+
     }
 }

@@ -34,6 +34,7 @@ public class AutoCareContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new SocialMediaConfiguration());
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
     }
 
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)

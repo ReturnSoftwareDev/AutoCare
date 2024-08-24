@@ -36,9 +36,21 @@ namespace AutoCare.Persistance.Configurations
                 .IsRequired(false)
                 .HasDefaultValue(false);
 
+            builder.Property(x => x.CreatedDate)
+                .IsRequired()
+                .HasDefaultValueSql("GETDATE()");
+
             builder.Property(x => x.MailConfirmed)
                 .IsRequired(false)
                 .HasDefaultValue(false);
+
+            builder.Property(x => x.RefreshToken)
+                .IsRequired(false)
+                .HasDefaultValue(false);
+
+            builder.Property(x => x.RefreshTokenEndDate)
+                .IsRequired(false)
+                .HasDefaultValue(null);
 
         }
     }

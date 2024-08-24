@@ -46,9 +46,43 @@ namespace AutoCare.Persistance.Repositories.EntityServices
 
                 var token =await _jwtGeneratorToken.GenerateToken(model);
 
+                user.RefreshToken = token.RefreshToken;
+
+                user.RefreshTokenEndDate = token.ExpireDate.AddMinutes(1);
+
+                await _writeRepository.UpdateAsync(user);
+
+                await _unitOfWork.SaveChangesAsync();
+
                 return new ResultResponse<JwtResponseModel>(token, "Giriş yapıldı", (int)HttpStatusCode.OK);
             }
 
+            else
+            {
+                return new ResultResponse<JwtResponseModel>(null, "Giriş başarısız", (int)HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<ResultResponse<JwtResponseModel>> RefreshTokenLoginUser(RefreshTokenLoginQuery refreshTokenLoginQuery)
+        {
+            var user = await _readRepository.GetSingleAsync(x => x.RefreshToken == refreshTokenLoginQuery.RefreshToken);
+
+            if(user is not null)
+            {
+                var model = _mapper.Map<UserLoginQueryResult>(user);
+
+                var token = await _jwtGeneratorToken.GenerateToken(model);
+
+                user.RefreshToken = token.RefreshToken;
+
+                user.RefreshTokenEndDate = token.ExpireDate.AddMinutes(1);
+
+                await _writeRepository.UpdateAsync(user);
+
+                await _unitOfWork.SaveChangesAsync();
+
+                return new ResultResponse<JwtResponseModel>(token, "Giriş yapıldı", (int)HttpStatusCode.OK);
+            }
             else
             {
                 return new ResultResponse<JwtResponseModel>(null, "Giriş başarısız", (int)HttpStatusCode.BadRequest);
