@@ -25,9 +25,9 @@ namespace AutoCare.Persistance.Repositories.EntityServices
         private readonly IReadRepository<User> _readRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly JwtGeneratorToken _jwtGeneratorToken;
+        private readonly TokenService _jwtGeneratorToken;
 
-        public UserService(IWriteRepository<User> writeRepository, IMapper mapper, IUnitOfWork unitOfWork, IReadRepository<User> readRepository, JwtGeneratorToken jwtGeneratorToken)
+        public UserService(IWriteRepository<User> writeRepository, IMapper mapper, IUnitOfWork unitOfWork, IReadRepository<User> readRepository, TokenService jwtGeneratorToken)
         {
             _writeRepository = writeRepository;
             _mapper = mapper;

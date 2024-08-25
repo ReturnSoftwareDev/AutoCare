@@ -73,7 +73,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization();
 
-builder.Services.AddScoped<JwtGeneratorToken>();
+builder.Services.AddScoped<TokenService>();
 
 
 builder.Services.AddDbContext<AutoCareContext>(opt =>

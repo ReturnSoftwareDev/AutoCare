@@ -1,4 +1,5 @@
-﻿using AutoCare.Application.Mediator.Results.UserResults;
+﻿using AutoCare.Application.Interfaces.TokenServices;
+using AutoCare.Application.Mediator.Results.UserResults;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -13,11 +14,11 @@ using System.Threading.Tasks;
 
 namespace AutoCare.Application.Tools
 {
-    public class JwtGeneratorToken
+    public class TokenService : ITokenService
     {
         private readonly JwtTokenModel _jwtTokenModel;
 
-        public JwtGeneratorToken(IOptions<JwtTokenModel> options)
+        public TokenService(IOptions<JwtTokenModel> options)
         {
             _jwtTokenModel = options.Value;
         }

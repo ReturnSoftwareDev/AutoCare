@@ -1,5 +1,7 @@
 ﻿using AutoCare.Application.Interfaces.EntityServices;
 using AutoCare.Application.Interfaces.GenericRepositories;
+using AutoCare.Application.Interfaces.TokenServices;
+using AutoCare.Application.Tools;
 using AutoCare.Application.UnitOfWorks;
 using AutoCare.Persistance.Repositories.EntityServices;
 using AutoCare.Persistance.Repositories.GenericRepositories;
@@ -21,6 +23,7 @@ namespace AutoCare.Persistance.Configurations
             services.AddScoped<IAboutService, AboutService>();
             services.AddScoped<IMechanicService, MechanicService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITokenService, TokenService>();
         }
     }
 }
