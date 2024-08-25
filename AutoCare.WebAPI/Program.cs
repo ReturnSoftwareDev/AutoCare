@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,7 +37,6 @@ builder.Services.AddCors(options =>
         {
             builder.AllowAnyHeader()
                    .AllowAnyMethod()
-                   .SetIsOriginAllowed((host) => true)
                    .AllowCredentials();
         });
 });
@@ -67,9 +68,34 @@ builder.Services.AddAuthentication(options =>
 
 });
 
-//Rate Limiting kurulacak.
-//Refresh token oluþturulacak db ye kayýt edilecek.
+builder.Services.AddRateLimiter(options =>
+{
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: httpContext.User.Identity?.Name ?? httpContext.Request.Headers.Host.ToString(),
+            factory: partition => new FixedWindowRateLimiterOptions
+            {
+                AutoReplenishment = true,
+                PermitLimit = 5,
+                Window = TimeSpan.FromSeconds(10)
+            }));
 
+    options.OnRejected = async (context, token) =>
+    {
+        context.HttpContext.Response.StatusCode = 429;
+
+        if (context.Lease.TryGetMetadata(MetadataName.RetryAfter, out var retryAfter))
+        {
+            await context.HttpContext.Response.WriteAsync(
+                $"Ýstek sýnýr sayýsýna ulaþtýnýz. {retryAfter.TotalMinutes} dakika sonra tekrar deneyiniz. ", cancellationToken: token);
+        }
+        else
+        {
+            await context.HttpContext.Response.WriteAsync(
+                "Ýstek sýnýrýna ulaþtýnýz. Daha sonra tekrar deneyin. ", cancellationToken: token);
+        }
+    };
+});
 
 builder.Services.AddAuthorization();
 
@@ -121,14 +147,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseRouting();
 
-app.UseMiddleware<CustomExceptionMiddleware>();
+app.UseRateLimiter();
+
 
 app.UseCors("AutoCareApiCors");
+
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<CustomExceptionMiddleware>();
+
 
 app.MapControllers();
 

@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace AutoCare.WebAPI.Controllers
 {
@@ -21,7 +22,7 @@ namespace AutoCare.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> GetSocialMedias()
         {
             var result = await _mediator.Send(new GetSocialMediasQuery());
