@@ -15,5 +15,6 @@ namespace AutoCare.Application.Interfaces.GenericRepositories
         Task DeleteAsync(int id);
         Task CreateAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);
+        Task AddRangeAsync(List<TEntity> Entities);
     }
 }

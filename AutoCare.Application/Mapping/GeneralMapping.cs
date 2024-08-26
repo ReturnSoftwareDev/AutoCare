@@ -1,5 +1,9 @@
-﻿using AutoCare.Application.Mediator.Commands.SocialMediaCommands;
+﻿using AutoCare.Application.Mediator.Commands.MechanicCommands;
+using AutoCare.Application.Mediator.Commands.ServiceCommands;
+using AutoCare.Application.Mediator.Commands.SocialMediaCommands;
 using AutoCare.Application.Mediator.Commands.UserCommands;
+using AutoCare.Application.Mediator.Results.MechanicResults;
+using AutoCare.Application.Mediator.Results.ServiceResults;
 using AutoCare.Application.Mediator.Results.SocialMediaResults;
 using AutoCare.Application.Mediator.Results.UserResults;
 using AutoCare.Domain.Entities;
@@ -15,6 +19,16 @@ namespace AutoCare.Application.Mapping
             CreateMap<UpdateSocialMediaCommand, SocialMedia>().ReverseMap();
             CreateMap<GetByIdSocialMediaQueryResult, SocialMedia>().ReverseMap();
             CreateMap<GetSocialMediasQueryResult, SocialMedia>().ReverseMap();
+
+            CreateMap<CreateMechanicCommand, Mechanic>().ReverseMap();
+            CreateMap<UpdateMechanicCommand, Mechanic>().ReverseMap();
+            CreateMap<GetMechanicByIdQueryResult, Mechanic>().ReverseMap();
+            CreateMap<GetMechanicQueryResult, Mechanic>().ReverseMap();
+
+            CreateMap<CreateServiceCommand, Service>().ReverseMap();
+            CreateMap<UpdateServiceCommand, Service>().ReverseMap();
+            CreateMap<GetServiceByIdQueryResult, Service>().ReverseMap();
+            CreateMap<GetServiceQueryResult, Service>().ReverseMap();
 
             CreateMap<CreateUserCommand, User>().ReverseMap();
             CreateMap<UserLoginQueryResult, User>().ReverseMap();

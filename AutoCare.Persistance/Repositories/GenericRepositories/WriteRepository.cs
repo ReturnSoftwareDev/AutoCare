@@ -20,6 +20,12 @@ namespace AutoCare.Persistance.Repositories.GenericRepositories
 
         public DbSet<TEntity> Table => _context.Set<TEntity>();
 
+        public async Task AddRangeAsync(List<TEntity> entities)
+        {
+           
+            await Table.AddRangeAsync(entities);
+        }
+
         public async Task CreateAsync(TEntity entity)
         {
             await Table.AddAsync(entity);
