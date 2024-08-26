@@ -22,7 +22,11 @@ namespace AutoCare.Persistance.Configurations
             services.AddScoped<ISocialMediaService, SocialMediaService>();
             services.AddScoped<IMechanicService, MechanicService>();
             services.AddScoped<IServiceService, ServiceService>();
+
+            services.AddScoped<IMechanicServicesService, MechanicServicesService>();    
+
             services.AddScoped<IUserService, UserService>();
+
             services.AddScoped<ITokenService, TokenService>();
         }
     }
