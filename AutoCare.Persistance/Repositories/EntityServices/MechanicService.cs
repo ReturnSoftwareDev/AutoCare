@@ -10,7 +10,7 @@ using AutoMapper;
 using System.Net;
 
 namespace AutoCare.Persistance.Repositories.EntityServices;
-internal class MechanicService : IMechanicService
+public class MechanicService : IMechanicService
 {
     private readonly IWriteRepository<Mechanic> _writeRepository;
     private readonly IReadRepository<Mechanic> _readRepository;

@@ -12,7 +12,14 @@ public class Mechanic : BaseEntity<short>
     public string PhoneNumber { get; set; }
     public string? Email { get; set; }
     public string? Description { get; set; }
-    public int AddressId { get; set; } 
-    public Address Address { get; set; }
-    public List<Service> Services { get; set; }
+    public string Street { get; set; }
+    public string City { get; set; }
+    public string Discrict { get; set; }
+    public string Neighborhood { get; set; }
+    public string BuildingNumber { get; set; }
+    public string IndustrialArea { get; set; }
+    public string? Latitude { get; set; }
+    public string? Longitude { get; set; }
+    public List<MechanicServices> MechanicServices { get; set; }
+    public List<MechanicBrands> MechanicBrands { get; set; }
 }

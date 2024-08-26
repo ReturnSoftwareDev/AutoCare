@@ -2,12 +2,6 @@
 using AutoCare.Domain.Enums;
 using AutoCare.Persistance.Configurations;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoCare.Persistance.Context;
 public class AutoCareContext : DbContext
@@ -17,8 +11,12 @@ public class AutoCareContext : DbContext
 
     }
     public DbSet<Audit> AuditLogs{ get; set; }
-    //public DbSet<Mechanic> Mechanics { get; set; }
-    //public DbSet<Service> Services { get; set; }
+    public DbSet<Mechanic> Mechanics { get; set; }
+    public DbSet<Service> Services { get; set; }
+    public DbSet<Brand> Brands { get; set; }
+    public DbSet<MechanicServices> MechanicServices { get; set; }
+    public DbSet<MechanicBrands> MechanicBrands { get; set; }
+
     //public DbSet<Address> Addresses { get; set; }
     //public DbSet<About> Abouts { get; set; }
     //public DbSet<AboutArticle> AboutArticles{ get; set; }
@@ -26,15 +24,19 @@ public class AutoCareContext : DbContext
     //public DbSet<CompanyAddress> CompanyAddresses { get; set; }
     //public DbSet<ContactMessage> ContactMessages { get; set; }
     //public DbSet<Newsletter> Newsletters { get; set; }
+
     public DbSet<SocialMedia> SocialMedias { get; set; }
     public DbSet<User> Users { get; set; }
-    //public DbSet<Inform> Informs { get; set; }
-    //public DbSet<Feature> Features { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new SocialMediaConfiguration());
         modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new MechanicConfiguration());
+        modelBuilder.ApplyConfiguration(new ServiceConfiguration());
+        modelBuilder.ApplyConfiguration(new BrandConfiguration());
+        modelBuilder.ApplyConfiguration(new MechanicServiceConfiguration());
+        modelBuilder.ApplyConfiguration(new MechanicBrandConfiguration());
     }
 
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)

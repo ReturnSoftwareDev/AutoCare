@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AutoCare.Domain.Entities;
-public class MechanicServices
+public class MechanicBrands
 {
-    public short MechanicId { get; set; } 
+    public short MechanicId { get; set; }
     public Mechanic Mechanic { get; set; }
-    
-    public short ServiceId { get; set; } 
-    public Service Service { get; set; }
+
+    public short BrandId { get; set; }
+    public Brand Brand { get; set; }
 }

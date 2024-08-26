@@ -1,21 +1,21 @@
 ﻿using AutoCare.Application.Base;
 using AutoCare.Application.Interfaces.EntityServices;
-using AutoCare.Application.Mediator.Queries.AboutQueries;
-using AutoCare.Application.Mediator.Results.AboutResults;
+using AutoCare.Application.Mediator.Queries.MechanicQueries;
+using AutoCare.Application.Mediator.Results.MechanicResults;
 using MediatR;
 
-namespace AutoCare.Application.Mediator.Handlers.AboutHandlers;
-public class GetMechanicQueryHandler : IRequestHandler<GetAboutQuery, ResultResponse<List<GetAboutQueryResult>>>
+namespace AutoCare.Application.Mediator.Handlers.MechanicHandlers;
+public class GetMechanicQueryHandler : IRequestHandler<GetMechanicQuery, ResultResponse<List<GetMechanicQueryResult>>>
 {
-    private readonly IAboutService _aboutService;
+    private readonly IMechanicService _MechanicService;
 
-    public GetMechanicQueryHandler(IAboutService aboutService)
+    public GetMechanicQueryHandler(IMechanicService MechanicService)
     {
-        _aboutService = aboutService;
+        _MechanicService = MechanicService;
     }
 
-    public async Task<ResultResponse<List<GetAboutQueryResult>>> Handle(GetAboutQuery request, CancellationToken cancellationToken)
+    public async Task<ResultResponse<List<GetMechanicQueryResult>>> Handle(GetMechanicQuery request, CancellationToken cancellationToken)
     {
-        return await _aboutService.GetAbouts(request);
+        return await _MechanicService.GetMechanics(request);
     }
 }

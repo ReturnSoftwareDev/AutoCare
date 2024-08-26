@@ -16,7 +16,6 @@ namespace AutoCare.Domain.Entities
         public bool? MailApproved { get; set; }
         public bool? MailConfirmed{ get; set; }
         public string Password{ get; set; }
-
         public string RefreshToken { get; set; }
         public DateTime? RefreshTokenEndDate { get; set; }
     }
