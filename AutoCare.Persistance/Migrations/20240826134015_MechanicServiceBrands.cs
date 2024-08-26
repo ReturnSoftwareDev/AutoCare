@@ -11,24 +11,6 @@ namespace AutoCare.Persistance.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
-                name: "RefreshToken",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: true,
-                defaultValue: "False",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreatedDate",
-                table: "Users",
-                type: "datetime2",
-                nullable: false,
-                defaultValueSql: "GETDATE()",
-                oldClrType: typeof(DateTime),
-                oldType: "datetime2");
-
             migrationBuilder.CreateTable(
                 name: "Brands",
                 columns: table => new
@@ -58,12 +40,12 @@ namespace AutoCare.Persistance.Migrations
                     PhoneNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Discrict = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Neighborhood = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    BuildingNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IndustrialArea = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BuildingNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IndustrialArea = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Latitude = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Longitude = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
@@ -103,7 +85,16 @@ namespace AutoCare.Persistance.Migrations
                 columns: table => new
                 {
                     MechanicId = table.Column<short>(type: "smallint", nullable: false),
-                    BrandId = table.Column<short>(type: "smallint", nullable: false)
+                    BrandId = table.Column<short>(type: "smallint", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    Id = table.Column<short>(type: "smallint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -127,7 +118,16 @@ namespace AutoCare.Persistance.Migrations
                 columns: table => new
                 {
                     MechanicId = table.Column<short>(type: "smallint", nullable: false),
-                    ServiceId = table.Column<short>(type: "smallint", nullable: false)
+                    ServiceId = table.Column<short>(type: "smallint", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    Id = table.Column<short>(type: "smallint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -174,26 +174,6 @@ namespace AutoCare.Persistance.Migrations
 
             migrationBuilder.DropTable(
                 name: "Services");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "RefreshToken",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true,
-                oldDefaultValue: "False");
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreatedDate",
-                table: "Users",
-                type: "datetime2",
-                nullable: false,
-                oldClrType: typeof(DateTime),
-                oldType: "datetime2",
-                oldDefaultValueSql: "GETDATE()");
         }
     }
 }

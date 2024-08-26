@@ -41,6 +41,7 @@ public class AutoCareContext : DbContext
 
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
     {
+        //HandleNewMechanicEntries();
         BeforeSaveChanges();
         return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
@@ -95,6 +96,40 @@ public class AutoCareContext : DbContext
             AuditLogs.Add(auditEntry.ToAudit());
         }
     }
+
+
+    //Bir Mechanic eklendiğinde otoamtik olarak mechanicservice tablosuna
+    //oluşturulan mechanicId ile service tablosunda olan serviceleri
+    //ekleyerek active durumunu false yapacağız
+
+    //private void HandleNewMechanicEntries()
+    //{
+    //    var newMechanics = ChangeTracker.Entries<Mechanic>()
+    //        .Where(e => e.State == EntityState.Added)
+    //        .Select(e => e.Entity)
+    //        .ToList();
+
+    //    foreach (var mechanic in newMechanics)
+    //    {
+    //        var services = Services.ToList(); // Tüm Service kayıtlarını alıyoruz
+    //        foreach (var service in services)
+    //        {
+    //            var mechanicService = new MechanicServices
+    //            {
+    //                MechanicId = mechanic.Id,
+    //                ServiceId = service.Id,
+    //                IsActive = false, // Varsayılan olarak false
+    //                CreatedDate = DateTime.UtcNow, // Yaratılma tarihini ayarla
+    //                CreatedBy = "1",
+    //                IsDeleted = false,
+                    
+    //            };
+
+    //            // Yeni MechanicService kayıtlarını ekle
+    //            MechanicServices.Add(mechanicService);
+    //        }
+    //    }
+    //}
 
 }
 

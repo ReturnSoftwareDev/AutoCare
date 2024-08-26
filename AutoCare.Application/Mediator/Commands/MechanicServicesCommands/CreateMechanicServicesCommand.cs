@@ -11,10 +11,12 @@ public class CreateMechanicServicesCommand : IRequest<CommandResponse>
 {
     public short MechanicId { get; set; }
     public short ServiceId { get; set; }
+    public bool IsActive { get; set; }
 
-    public CreateMechanicServicesCommand(short mechanicId, short serviceId)
+    public CreateMechanicServicesCommand(short mechanicId, short serviceId, bool isActive = false)
     {
         MechanicId = mechanicId;
         ServiceId = serviceId;
+        IsActive = isActive;
     }
 }

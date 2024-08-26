@@ -10,8 +10,23 @@ namespace AutoCare.Persistance.Configurations
         {
             builder.ToTable("MechanicBrands");
 
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).UseIdentityColumn();
+
             builder.HasKey(mb => new { mb.MechanicId, mb.BrandId });
 
+            builder.Property(x => x.CreatedDate)
+               .IsRequired()
+               .HasDefaultValueSql("GETDATE()");
+
+            builder.Property(x => x.UpdatedDate)
+                .IsRequired(false);
+
+            builder.Property(x => x.IsDeleted)
+                .IsRequired()
+                .HasDefaultValue(false);
+
+            builder.HasQueryFilter(x => !x.IsDeleted);
             // Relationships
             builder.HasOne(mb => mb.Mechanic)
                 .WithMany(m => m.MechanicBrands)
